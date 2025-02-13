@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}新規登録{% endblock %}
+{% block content %}
+<h2>新規作成</h2>
+<form method="post" class="p-4 m-4 bg-light border">
+    {% csrf_token %}
+    {% for field in form %}
+        <div>
+            {{ field.label_tag }}<br>
+            {{ field }}
+        </div>
+        {% for error in field.Errors %}
+            <p style="color:red">{{ error }}</p>
+        {% endfor %}
+    {% endfor %}
+    <br>
+    <input type="submit" value="投稿する" class="btn btn-primary">
+</form>
+{% endblock %}

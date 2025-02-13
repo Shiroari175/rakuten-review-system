@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}記事詳細{% endblock %}
+{% block content %}
+<div class="card" style="width:300px;">
+    <div class="card-body" >
+        <h5 class="card-title">{{ object.title }}</h5>
+        <p class="card-text">{{ object.entry_text }}</p>
+        <br>
+        <a href="{% url 'update_entry' object.pk %}" class="btn btn-dark">修正</a>
+        <a href="{% url 'delete_entry' object.pk %}" class="btn btn-danger">削除</a>
+    </div>
+</div>
+{% endblock %}

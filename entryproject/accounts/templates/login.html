@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <title>ログインページ</title>
+</head>
+<body>
+{% if form.errors %}
+    <p style="color:red">ユーザー名かパスワードが一致しません。</p>
+{% endif %}
+{% if user.is_authenticated %}
+    <h2>すでにログインしています。</h2>
+{% else %}
+    <form method="post">
+        {% csrf_token %}
+        <h1>ログインページ</h1>
+        <label for="id_username">Username</label>
+        <input type="text" name="username" id="id_username">
+        <br>
+        <label for="id_password">Password</label>
+        <input type="password" name="password" id="id_password">
+        <br>
+        <br>
+        <input type="submit" value="ログイン">
+    </form>
+{% endif %}
+
+</body>
+</html>
