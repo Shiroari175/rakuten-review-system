@@ -7,6 +7,11 @@ from django.http import HttpResponse
 # python manage.py test
 # python manage.py test myapp.tests.HelloWorldViewTest.test_hello_world_view
 
+# 1.Client を使ってDjangoのテストクライアントを作成し、HTTPリクエストをシミュレートします。
+# 2.reverse('hello_world') を使って、hello_worldビューへのURLを取得します。urls.pyでこのビューに対応するURLパターンが定義されていることを確認してください。
+# 3.self.assertEqual(response.status_code, 200) を使って、レスポンスのHTTPステータスコードが200（成功）であることを確認します。
+# 4.self.assertContains(response, '<h2>hello world from Review_app!!!</h2>') を使って、レスポンスの内容に特定の文字列が含まれていることを確認します。
+
 
 class HelloWorldViewTest(TestCase):
     def setUp(self):
