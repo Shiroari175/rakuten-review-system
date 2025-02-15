@@ -21,6 +21,7 @@ from django.views.generic import DetailView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('app/', include('entryapp.urls')) ,
+    path('rak/', include('reviewapp.urls')) ,
     path('', include('accounts.urls')) ,
 
 ]

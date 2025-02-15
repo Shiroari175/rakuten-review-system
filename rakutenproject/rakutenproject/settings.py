@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'entryapp.apps.EntryappConfig' ,
     'accounts.apps.AccountsConfig' ,
+    'reviewapp.apps.ReviewappConfig' ,
 ]
 
 MIDDLEWARE = [
