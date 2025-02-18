@@ -32,8 +32,12 @@ class ReviewModel(models.Model) :
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
 
-    # テーブル名指定
+    # オプション指定
     class Meta:
-        db_table = 'T_REVIEW'
+        db_table = 'T_REVIEW' # テーブル名指定
+        indexes = [
+            models.Index(fields=['item_nm']),
+            models.Index(fields=['review_text']),
+        ]
 
 
