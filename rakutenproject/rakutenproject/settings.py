@@ -143,7 +143,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # ログイン時に遷移するページの変更
-LOGIN_REDIRECT_URL = 'list_entry'
+LOGIN_REDIRECT_URL = 'dashboard'
 
 # ログインしていない時に遷移するページの変更
 LOGIN_URL = 'accounts:login'
