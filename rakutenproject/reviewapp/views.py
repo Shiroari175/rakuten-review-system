@@ -1,3 +1,5 @@
+import subprocess
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -13,4 +15,34 @@ def hello_world(request) :
 class DashBoardView(LoginRequiredMixin, ListView) :
     template_name = 'dashboard.html'
     model = ReviewModel
+
+def run_scraping(request):
+    """
+    楽天レビューのスクレイピングプログラムをキックする
+    :param request:
+    :return: なし
+    """
+    if request.method == 'POST':
+
+        # 引数を指定してスクリプトを実行
+        arg1 = 'https://review.rakuten.co.jp/item/1/236315_10011235/1.1/'
+        arg2 = '1'
+
+        # os.system('python /path/to/your_script.py')
+        # サブプロセスを使ってスクリプトを実行する
+        result = subprocess.run(['python', 'scraping/review.py', arg1, arg2]
+                                , capture_output=True
+                                , text=True
+                                )
+
+        return HttpResponse("Script executed successfully. : "
+                            "ReturnCode : " + str(result.returncode) + "\n"
+                             + "Outmsg : " + str(result.stdout) + "\n"
+                             + "Errmsg : " + str(result.stderr)
+                            )
+
+    #Get時は何もせず、返して終了
+    return render(request, 'dashboard.html')
+
+
 
