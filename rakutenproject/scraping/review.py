@@ -241,5 +241,5 @@ if __name__ == "__main__":
         scrape(url) # スクレイピング実行
         # print(f"*** 楽天レビューデータ抽出END *** : 登録した件数：{iCount}")
     else:
-        print("URLを引数として提供してください")
+        print("URLとページ数を引数として、提供してください")
 
