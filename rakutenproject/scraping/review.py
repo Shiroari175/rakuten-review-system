@@ -29,7 +29,7 @@ def shorten_text(edit_text, max_length=100):
         return edit_text[:max_length] + "..."
     return edit_text
 
-def scrape(url, page) :
+def scrape(url, page, user_id) :
 
     """
     スクレイピング実行
@@ -70,7 +70,7 @@ def scrape(url, page) :
 
         # URL生成
         edit_url = f"{url}?p={i}#itemReviewList"
-        print(f"処理URL:{edit_url}")
+        # print(f"処理URL:{edit_url}")
 
         # WEBドライバ実行 -----
         driver.get(edit_url)
@@ -194,11 +194,12 @@ def scrape(url, page) :
                 if item_name == row[0] \
                         and purchaser_name == row[1] \
                         and review_text[:12] == row[2][:12]:
-                    print(f"すでに登録されています。登録をスキップします：{row[0]},{row[1]},{row[2][:12]}...")
+                    # print(f"すでに登録されています。登録をスキップします：{row[0]},{row[1]},{row[2][:12]}...")
                     continue
 
             # データ追加
-            cursor.execute("INSERT INTO T_REVIEW ( HAKI_FLG ,"
+            cursor.execute("INSERT INTO T_REVIEW ( "
+                           "HAKI_FLG ,"
                            "ITEM_NM ,"
                            "PURCHASER_NM ,"
                            "EVALUATION ,"
@@ -207,8 +208,9 @@ def scrape(url, page) :
                            "SEX ,"
                            "AGE ,"
                            "ITEM_DETAIL ,"
-                           "ORDER_DATE"
-                           ") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                           "ORDER_DATE ,"
+                           "USER_ID "
+                           ") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
                            ,( 0
                              , item_name
                              , purchaser_name
@@ -219,6 +221,7 @@ def scrape(url, page) :
                              , item_detail_list[2]
                              , item_detail_list[3]
                              , order_date
+                             , user_id
                              )
                            )
 
@@ -236,10 +239,10 @@ def scrape(url, page) :
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        url = sys.argv[1]
-        scrape(url) # スクレイピング実行
-        # print(f"*** 楽天レビューデータ抽出END *** : 登録した件数：{iCount}")
+    if len(sys.argv) > 3:
+        # スクレイピング実行
+        result_msg = scrape(sys.argv[1], int(sys.argv[2]), sys.argv[3])
+        print(result_msg)
     else:
         print("URLとページ数を引数として、提供してください")
 
