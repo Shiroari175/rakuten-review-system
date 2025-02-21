@@ -11,6 +11,9 @@ from .models import ReviewModel
 def hello_world(request) :
     return HttpResponse('<h2>hello world from Review_app!!!</h2>')
 
+def test_login_view(request):
+    return render(request, 'test_login.html')
+
 # LoginRequiredMixin:要認証
 class DashBoardView(LoginRequiredMixin, ListView) :
     template_name = 'dashboard.html'
