@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 import re
+import datetime
 
 """
  楽天レビュー スクレイピング
@@ -209,8 +210,9 @@ def scrape(url, page, user_id) :
                            "AGE ,"
                            "ITEM_DETAIL ,"
                            "ORDER_DATE ,"
+                           "CREATE_TIME ,"
                            "USER_ID "
-                           ") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                           ") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
                            ,( 0
                              , item_name
                              , purchaser_name
@@ -221,6 +223,8 @@ def scrape(url, page, user_id) :
                              , item_detail_list[2]
                              , item_detail_list[3]
                              , order_date
+                              # 秒以下を０にする
+                             , datetime.datetime.now().replace(microsecond=0)
                              , user_id
                              )
                            )

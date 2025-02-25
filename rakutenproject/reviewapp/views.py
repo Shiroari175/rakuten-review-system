@@ -28,7 +28,7 @@ def run_scraping(request):
     if request.method == 'POST':
 
         # 引数を指定してスクリプトを実行
-        arg1 = 'https://review.rakuten.co.jp/item/1/236315_10011235/1.1/'
+        arg1 = 'https://review.rakuten.co.jp/item/1/376252_10000400/1.1/'
         arg2 = '1'
         arg3 = str(request.user.id)
 
