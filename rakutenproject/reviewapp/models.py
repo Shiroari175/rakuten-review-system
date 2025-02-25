@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 
 from accounts.models import CustomUser
@@ -30,7 +31,7 @@ class ReviewModel(models.Model) :
     item_detail = models.CharField(max_length=100)
     order_date = models.DateField(null=True, blank=True)
     create_time = models.DateTimeField(auto_now_add=True)
-    update_time = models.DateTimeField(auto_now=True)
+    update_time = models.DateTimeField(auto_now=True, null=True, blank=True)
 
     # オプション指定
     class Meta:
