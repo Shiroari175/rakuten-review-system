@@ -8,25 +8,36 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <!-- Custom CSS -->
     {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/base_style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-right bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'list_entry' %}"> （仮）楽天レビュー閲覧システム </a>
+        <a class="navbar-brand" href="{% url 'dashboard' %}"> （仮）楽天レビュー閲覧システム </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'user_list' user.pk %}">私の学習ノート一覧</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    楽天みんなのレビュー
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">スクレイピング</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">データ一覧確認</a></li>
+                </ul>
             </li>
+            <!--
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'create_entry' %}">学習ノート登録</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'create_entry' %}">* 工事中 *</a>
             </li>
+            -->
             {% endif %}
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                その他
+                ユーザ処理
             </a>
                 <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{% url 'accounts:signup' %}">新規ユーザー登録</a></li>

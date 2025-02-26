@@ -2,7 +2,6 @@
  BACE スタイル CSS
 */
 
-/* TEST */
 html {
     margin: 0;
     padding: 0;
@@ -15,36 +14,8 @@ body {
     padding: 0;
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center; /* 水平方向の中央揃え */
-    align-items: center; /* 垂直方向の中央揃え */
-    background-image: url('../img/background.jpg'); /* 背景画像を使用 */
-    background-size: cover;
     font-family: 'Roboto', sans-serif; /* Google Fontsの例 */
 }
-.login-title {
-    font-size: 22px;
-    margin-bottom: 30px;
-}
-.login-form{
-    width: 600px;
-}
-.login-container {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 80px auto;
-}
-.btn-custom {
-    background-color: #007bff;
-    border: none;
-    border-radius: 50px;
-    padding: 10px 20px;
-    transition: background-color 0.3s ease;
-}
-.btn-custom:hover {
-    background-color: #0056b3;
-    color: #FFF;
-}
+
+
 
