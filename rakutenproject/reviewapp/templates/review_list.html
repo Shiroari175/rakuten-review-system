@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}レビュー　一覧{% endblock %}
+{% block content %}
+<div class="list-group">
+    <table>
+
+    {% for entry in object_list  %}
+        <td>
+            <a href="#" class="list-group-item list-group-item-action">
+            </a>
+        </td>
+    {% endfor %}
+    </table>
+</div>
+{% endblock content %}
+

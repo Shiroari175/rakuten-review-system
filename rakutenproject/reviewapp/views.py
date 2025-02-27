@@ -18,6 +18,10 @@ def input_scraping_view(request):
     return render(request, 'input_scraping.html')
 
 # LoginRequiredMixin:要認証
+class ListReView(LoginRequiredMixin, ListView) :
+    template_name = 'review_list.html'
+    model = ReviewModel
+
 class DashBoardView(LoginRequiredMixin, ListView) :
     template_name = 'dashboard.html'
     model = ReviewModel
