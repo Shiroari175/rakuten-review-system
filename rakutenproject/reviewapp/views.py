@@ -30,10 +30,9 @@ def run_scraping(request):
     """
     if request.method == 'POST':
 
-        # 引数を指定してスクリプトを実行
-        arg1 = 'https://review.rakuten.co.jp/item/1/376252_10000400/1.1/'
-        arg2 = '1'
-        arg3 = str(request.user.id)
+        arg1 = str(request.POST.get('name-rak-url'))
+        arg2 = request.POST.get('name-rak-page')
+        arg3 = str(request.user.id) #
 
         # サブプロセスを使ってスクリプトを実行する
         result = subprocess.run(['python', 'scraping/review.py', arg1, arg2, arg3]

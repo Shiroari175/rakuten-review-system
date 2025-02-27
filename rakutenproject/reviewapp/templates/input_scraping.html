@@ -1,12 +1,20 @@
 {% extends 'base.html' %}
 {% block title %}楽天レビュー：スクレイピング実行{% endblock %}
 {% block content %}
-<div class="list-group">
-    <h4>楽天レビュー：スクレイピング実行</h4>
+<div class="rak-scraping-container">
+    <h4 class="text-center rak-scraping-title">楽天レビュー：スクレイピング実行</h4>
     <br>
-    <form action="{% url 'run_script' %}" method="post" id="rak-scraping-form">
+    <form action="{% url 'run_script' %}" method="post" class="rak-scraping-form">
     {% csrf_token %}
-        <button type="submit">楽天レビュー：スクレイピング実行</button>
+        <div class="mb-4">
+            <label for="id_url" class="form-label">楽天レビューURLを入力：　</label>
+            <input type="text" class="form-control" name="name-rak-url" id="id_url">
+        </div>
+        <div class="mb-5">
+            <label for="id_page" class="form-label d-inline">取得するページ数：　</label>
+            <input type="number" min="1" max="50" class="form-control d-inline w-25" name="name-rak-page" id="id_page">
+        </div>
+        <button type="submit" class="btn btn-custom w-100">楽天レビュー：スクレイピング実行</button>
     </form>
 </div>
 {% endblock content %}

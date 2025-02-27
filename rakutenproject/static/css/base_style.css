@@ -17,5 +17,28 @@ body {
     font-family: 'Roboto', sans-serif; /* Google Fontsの例 */
 }
 
+.rak-scraping-title {
+    font-size: 22px;
+    margin: 20px;
+}
+
+.rak-scraping-form {
+    width: 700px;
+    margin: 0 auto;
+}
+
+.btn-custom {
+    background-color: #007bff;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+.btn-custom:hover {
+    background-color: #0056b3;
+    color: #FFF;
+}
+
+
 
 
