@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}楽天レビュー：スクレイピング実行{% endblock %}
+{% block content %}
+<div class="list-group">
+    <h4>楽天レビュー：スクレイピング実行</h4>
+    <br>
+    <form action="{% url 'run_script' %}" method="post" id="rak-scraping-form">
+    {% csrf_token %}
+        <button type="submit">楽天レビュー：スクレイピング実行</button>
+    </form>
+</div>
+{% endblock content %}
+

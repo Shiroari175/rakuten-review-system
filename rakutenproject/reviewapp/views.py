@@ -14,6 +14,9 @@ def hello_world(request) :
 def test_login_view(request):
     return render(request, 'test_login.html')
 
+def input_scraping_view(request):
+    return render(request, 'input_scraping.html')
+
 # LoginRequiredMixin:要認証
 class DashBoardView(LoginRequiredMixin, ListView) :
     template_name = 'dashboard.html'
