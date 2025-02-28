@@ -27,6 +27,7 @@ body {
     margin: 0 auto;
 }
 
+/* テーブル：共通 */
 table {
     width: 75%;
     margin: 35px auto;
@@ -34,7 +35,7 @@ table {
 }
 
 th, td {
-    padding: 12px;
+    padding: 10px;
     text-align: left;
     border: 1px solid #999;
 }
@@ -63,6 +64,17 @@ th {
     background-color: #0056b3;
     color: #FFF;
 }
+
+/* ページネーション部分：共通 */
+.list-pagination {
+    margin: 30px;
+}
+.step-links{
+    margin: 0 auto;
+    padding 20px;
+    text-align: center;
+}
+
 
 
 

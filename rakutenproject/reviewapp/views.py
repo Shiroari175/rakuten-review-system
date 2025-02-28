@@ -21,13 +21,14 @@ def input_scraping_view(request):
 class ListReView(LoginRequiredMixin, ListView) :
     template_name = 'review_list.html'
     model = ReviewModel
+    paginate_by = 20  # 1ページあたりの表示件数
 
     def get_queryset(self):
         queryset = super().get_queryset()
         # ここでデータを編集します
         for obj in queryset:
-            # 商品名は20文字以降カット（長いので）
-            obj.item_nm = obj.item_nm[:20] + "…"
+            # 商品名は27文字以降カット（長いので）
+            obj.item_nm = obj.item_nm[:27] + "…"
         return queryset
 
 class DashBoardView(LoginRequiredMixin, ListView) :
