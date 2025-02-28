@@ -27,6 +27,31 @@ body {
     margin: 0 auto;
 }
 
+table {
+    width: 75%;
+    margin: 35px auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #999;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+th {
+    background: #191970;
+    color: #FFF;
+}
+
 .btn-custom {
     background-color: #007bff;
     border: none;

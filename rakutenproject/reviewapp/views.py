@@ -22,6 +22,14 @@ class ListReView(LoginRequiredMixin, ListView) :
     template_name = 'review_list.html'
     model = ReviewModel
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # ここでデータを編集します
+        for obj in queryset:
+            # 商品名は20文字以降カット（長いので）
+            obj.item_nm = obj.item_nm[:20] + "…"
+        return queryset
+
 class DashBoardView(LoginRequiredMixin, ListView) :
     template_name = 'dashboard.html'
     model = ReviewModel

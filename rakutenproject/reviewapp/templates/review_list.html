@@ -1,14 +1,33 @@
 {% extends 'base.html' %}
 {% block title %}レビュー　一覧{% endblock %}
 {% block content %}
-<div class="list-group">
+<div class="list-container">
     <table>
-
-    {% for entry in object_list  %}
+    <tr>
+        <th>商品名</th>
+        <th>購入者名</th>
+        <th>評価</th>
+        <th>性別</th>
+        <th>年齢</th>
+    </tr>
+    {% for review in object_list  %}
+    <tr>
         <td>
-            <a href="#" class="list-group-item list-group-item-action">
-            </a>
+            {{ review.item_nm }}
         </td>
+        <td>
+            {{ review.purchaser_nm }}
+        </td>
+        <td>
+            {{ review.evaluation }}
+        </td>
+        <td>
+            {{ review.sex }}
+        </td>
+        <td>
+            {{ review.age }}
+        </td>
+    </tr>
     {% endfor %}
     </table>
 </div>
