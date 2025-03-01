@@ -66,6 +66,10 @@ th {
 }
 
 /* ページネーション部分：共通 */
+.list-title {
+    margin: 20px;
+    font-size: 24px;
+}
 .list-pagination {
     margin: 15px;
     padding-bottom: 30px;
