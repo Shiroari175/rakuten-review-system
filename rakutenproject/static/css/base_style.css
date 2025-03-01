@@ -67,7 +67,8 @@ th {
 
 /* ページネーション部分：共通 */
 .list-pagination {
-    margin: 30px;
+    margin: 15px;
+    padding-bottom: 30px;
 }
 .step-links{
     margin: 0 auto;
