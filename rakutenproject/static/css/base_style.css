@@ -80,6 +80,10 @@ th {
     text-align: center;
 }
 
+/* ページネーション：1ページ行数指定 */
+#id-page-size {
+    width: 100px;
+}
 
 
 

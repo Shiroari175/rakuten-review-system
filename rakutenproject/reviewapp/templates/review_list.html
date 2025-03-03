@@ -2,17 +2,22 @@
 {% block title %}レビュー　一覧{% endblock %}
 {% block content %}
 <div class="list-container">
-    <h2 class="list-title text-center">レビュー一覧</h2>
-    件数：&nbsp;{{ page_obj.paginator.count }}&nbsp;件
-    <form method="get" action=".">
-    <label for="page_size">表示件数:</label>
-    <select id="page_size" name="page_size" onchange="this.form.submit()">
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="25">25</option>
-        <option value="50">50</option>
-    </select>
-    </form>
+    <h2 class="list-title text-center">レビュー&nbsp;一覧</h2>
+    <div class="position-relative ms-5 me-5">
+        <div class="position-absolute top-50 left-0">
+            件数：&nbsp;{{ page_obj.paginator.count }}&nbsp;件
+        </div>
+        <form method="get" action="." id="id-page-count-form">
+          <div class="text-end">
+            <label for="id-page-size" class="form-label d-inline">表示件数:</label>
+            <select id="id-page-size" name="page_size" class="form-select d-inline" onchange="this.form.submit()">
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="75">75</option>
+            </select>
+          </div>
+        </form>
+    </div>
     <table>
     <tr>
         <th>商品名</th>
