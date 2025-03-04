@@ -1,15 +1,29 @@
 {% extends 'base.html' %}
 {% block title %}レビュー詳細表示{% endblock %}
 {% block content %}
-<h2>レビュー詳細表示</h2>
-    {% for field in form %}
-        <div>
-            {{ field.label_tag }}<br>
-            {{ field }}
-        </div>
-        {% for error in field.Errors %}
-            <p style="color:red">{{ error }}</p>
-        {% endfor %}
-    {% endfor %}
-    <br>
+<h1 class="custom-title text-center">レビュー詳細表示</h1>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{ object.item_nm }}</h5>
+        <br>
+        <p class="card-text">{{ object.purchaser_nm }}</p>
+        <br>
+        <p class="card-text">{{ object.evaluation }}</p>
+        <br>
+        <p class="card-text">{{ object.review_title }}</p>
+        <br>
+        <p class="card-text">{{ object.review_text }}</p>
+        <br>
+        <p class="card-text">{{ object.sex }}</p>
+        <br>
+        <p class="card-text">{{ object.age }}</p>
+        <br>
+        <p class="card-text">{{ object.item_detail }}</p>
+        <br>
+        <p class="card-text">{{ object.order_date }}</p>
+        <br>
+        <br>
+        <a href="{% url 'review_list' %}" class="btn btn-dark">一覧に戻る</a>
+    </div>
+</div>
 {% endblock %}

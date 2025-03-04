@@ -65,11 +65,13 @@ th {
     color: #FFF;
 }
 
-/* ページネーション部分：共通 */
-.list-title {
+/* タイトル：共通 */
+.custom-title {
     margin: 20px;
     font-size: 24px;
 }
+
+/* ページネーション部分：共通 */
 .list-pagination {
     margin: 15px;
     padding-bottom: 30px;
@@ -83,6 +85,12 @@ th {
 /* ページネーション：1ページ行数指定 */
 #id-page-size {
     width: 100px;
+}
+
+/* カード：共通 */
+.custom-title {
+    margin: 20px;
+    font-size: 24px;
 }
 
 
