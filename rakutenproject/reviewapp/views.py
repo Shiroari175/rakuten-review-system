@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import ListView
+from django.core.paginator import Paginator
 from .models import ReviewModel
 
 
@@ -21,7 +22,8 @@ def input_scraping_view(request):
 class ListReView(LoginRequiredMixin, ListView) :
     template_name = 'review_list.html'
     model = ReviewModel
-    paginate_by = 20  # 1ページあたりの表示件数
+    # 1ページあたりの表示件数
+    # paginate_by = 20
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -30,6 +32,21 @@ class ListReView(LoginRequiredMixin, ListView) :
             # 商品名は27文字以降カット（長いので）
             obj.item_nm = obj.item_nm[:27] + "…"
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # デフォルトの表示件数を25に設定
+        page_size = self.request.GET.get('page_size', 25)
+
+        paginator = Paginator(self.get_queryset(), page_size)
+        page = self.request.GET.get('page')
+
+        context['page_obj'] = paginator.get_page(page)
+        context['page_size'] = page_size
+
+        return context
+
 
 class DashBoardView(LoginRequiredMixin, ListView) :
     template_name = 'dashboard.html'

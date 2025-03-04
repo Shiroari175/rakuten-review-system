@@ -11,9 +11,9 @@
           <div class="text-end">
             <label for="id-page-size" class="form-label d-inline">表示件数:</label>
             <select id="id-page-size" name="page_size" class="form-select d-inline" onchange="this.form.submit()">
-              <option value="25">25</option>
-              <option value="50">50</option>
-              <option value="75">75</option>
+              <option value="25" {% if page_size == '25' %}selected{% endif %} >25</option>
+              <option value="50" {% if page_size == '50' %}selected{% endif %} >50</option>
+              <option value="75" {% if page_size == '75' %}selected{% endif %} >75</option>
             </select>
           </div>
         </form>
@@ -50,8 +50,8 @@
 <div class="list-pagination">
     <div class="step-links">
         {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo;  最初</a>&nbsp;&nbsp;&nbsp;
-            <a href="?page={{ page_obj.previous_page_number }}">前へ</a>&nbsp;&nbsp;&nbsp;
+            <a href="?page=1&page_size={{ page_size }}">&laquo;  最初</a>&nbsp;&nbsp;&nbsp;
+            <a href="?page={{ page_obj.previous_page_number }}&page_size={{ page_size }}">前へ</a>&nbsp;&nbsp;&nbsp;
         {% endif %}
 
         <span class="current">
@@ -59,8 +59,8 @@
         </span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">次へ</a>&nbsp;&nbsp;&nbsp;
-            <a href="?page={{ page_obj.paginator.num_pages }}">最後  &raquo;</a>
+            <a href="?page={{ page_obj.next_page_number }}&page_size={{ page_size }}">次へ</a>&nbsp;&nbsp;&nbsp;
+            <a href="?page={{ page_obj.paginator.num_pages }}&page_size={{ page_size }}">最後  &raquo;</a>
         {% endif %}
     </div>
 </div>
