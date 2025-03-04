@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}レビュー詳細表示{% endblock %}
+{% block content %}
+<h2>レビュー詳細表示</h2>
+    {% for field in form %}
+        <div>
+            {{ field.label_tag }}<br>
+            {{ field }}
+        </div>
+        {% for error in field.Errors %}
+            <p style="color:red">{{ error }}</p>
+        {% endfor %}
+    {% endfor %}
+    <br>
+{% endblock %}

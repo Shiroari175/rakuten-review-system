@@ -29,7 +29,7 @@
     {% for review in page_obj  %}
     <tr>
         <td>
-            {{ review.item_nm }}
+            <a href="{% url 'review_detail' review.pk %}">{{ review.item_nm }}</a>
         </td>
         <td>
             {{ review.purchaser_nm }}

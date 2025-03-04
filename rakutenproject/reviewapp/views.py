@@ -3,7 +3,7 @@ import subprocess
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator
 from .models import ReviewModel
 
@@ -20,6 +20,9 @@ def input_scraping_view(request):
 
 # LoginRequiredMixin:要認証
 class ListReView(LoginRequiredMixin, ListView) :
+    """
+    楽天レビュー 一覧表示
+    """
     template_name = 'review_list.html'
     model = ReviewModel
     # 1ページあたりの表示件数
@@ -47,8 +50,14 @@ class ListReView(LoginRequiredMixin, ListView) :
 
         return context
 
+class DetailReView(LoginRequiredMixin, DetailView) :
+    template_name = 'review_detail.html'
+    model = ReviewModel
 
 class DashBoardView(LoginRequiredMixin, ListView) :
+    """
+    ダッシュボード
+    """
     template_name = 'dashboard.html'
     model = ReviewModel
 
