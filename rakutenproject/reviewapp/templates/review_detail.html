@@ -1,30 +1,45 @@
 {% extends 'base.html' %}
 {% block title %}レビュー詳細表示{% endblock %}
 {% block content %}
+<style>
+    body {
+        height: 130%;
+    }
+</style>
 <h1 class="custom-title text-center">レビュー詳細表示</h1>
-<div class="card">
-    <div class="card-body">
+<div class="card" style="width: 75%; margin:35px auto; background: #A0eeA0">
+    <div class="card-body p-4">
         <h5 class="card-title">商品名：</h5>
         <h5 class="card-title">{{ object.item_nm }}</h5>
         <br>
+        <h5 class="card-title">購入者名：</h5>
         <p class="card-text">{{ object.purchaser_nm }}</p>
         <br>
+        <h5 class="card-title">評価：</h5>
         <p class="card-text">{{ object.evaluation }}</p>
         <br>
+        <h5 class="card-title">レビュータイトル：</h5>
         <p class="card-text">{{ object.review_title }}</p>
         <br>
+        <h5 class="card-title">レビュー本文：</h5>
         <p class="card-text">{{ object.review_text }}</p>
         <br>
+        <h5 class="card-title">性別：</h5>
         <p class="card-text">{{ object.sex }}</p>
         <br>
+        <h5 class="card-title">年齢：</h5>
         <p class="card-text">{{ object.age }}</p>
         <br>
+        <h5 class="card-title">商品詳細（カラー・サイズなど）：</h5>
         <p class="card-text">{{ object.item_detail }}</p>
         <br>
+        <h5 class="card-title">注文日：</h5>
         <p class="card-text">{{ object.order_date }}</p>
         <br>
         <br>
-        <a href="{% url 'review_list' %}" class="btn btn-dark">一覧に戻る</a>
+        <div class="d-flex justify-content-center">
+            <a href="{% url 'review_list' %}" class="btn btn-dark">一覧に戻る</a>
+        </div>
     </div>
 </div>
 {% endblock %}
