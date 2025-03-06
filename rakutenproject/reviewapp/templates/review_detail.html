@@ -22,7 +22,11 @@
         <p class="card-text">{{ object.evaluation }}</p>
         <br>
         <h5 class="card-title">レビュータイトル：</h5>
-        <p class="card-text">{{ object.review_title }}</p>
+        {% if object.review_title is None %}
+            <p class="card-text">なし</p>
+        {% else %}
+            <p class="card-text">{{ object.review_title }}</p>
+        {% endif %}
         <br>
         <h5 class="card-title">レビュー本文：</h5>
         <p class="card-text">{{ object.review_text }}</p>
@@ -37,7 +41,11 @@
         <p class="card-text">{{ object.item_detail }}</p>
         <br>
         <h5 class="card-title">注文日：</h5>
-        <p class="card-text">{{ object.order_date }}</p>
+        {% if object.order_date is None %}
+            <p class="card-text">なし</p>
+        {% else %}
+            <p class="card-text">{{ object.order_date }}</p>
+        {% endif %}
         <br>
         <br>
         <div class="d-flex justify-content-center">
