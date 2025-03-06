@@ -20,6 +20,7 @@
     </div>
     <table>
     <tr>
+        <th>No.</th>
         <th>商品名</th>
         <th>購入者名</th>
         <th>評価</th>
@@ -28,6 +29,9 @@
     </tr>
     {% for review in page_obj  %}
     <tr>
+        <td>
+            {{ review.id }}
+        </td>
         <td>
             <a href="{% url 'review_detail' review.pk %}">{{ review.item_nm }}</a>
         </td>
