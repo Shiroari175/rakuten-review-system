@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import hello_world, run_scraping, test_login_view, input_scraping_view, DetailReView
+from .views import hello_world, run_scraping, input_scraping_view, DetailReView
 from .views import DashBoardView, ListReView
 
 # appのURLSルーティング設定
