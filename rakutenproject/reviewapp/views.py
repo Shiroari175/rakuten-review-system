@@ -12,9 +12,6 @@ from .models import ReviewModel
 def hello_world(request) :
     return HttpResponse('<h2>hello world from Review_app!!!</h2>')
 
-def test_login_view(request):
-    return render(request, 'test_login.html')
-
 def input_scraping_view(request):
     return render(request, 'input_scraping.html')
 
