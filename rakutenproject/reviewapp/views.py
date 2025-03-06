@@ -73,15 +73,15 @@ class DetailReView(LoginRequiredMixin, DetailView) :
     template_name = 'review_detail.html'
     model = ReviewModel
 
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        # ここでデータを編集します
-        for obj in queryset:
-            # 評価１～５を☆で表現する
-            obj.star = output_evaluation_to_star(obj.evaluation)
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        # 商品名は27文字以降カット（長いので）
+        obj.item_nm = obj.item_nm[:27] + "…"
 
-        return queryset
+        # 評価１～５を☆で表現する
+        # obj.star = output_evaluation_to_star(obj.evaluation)
 
+        return obj
 
 class DashBoardView(LoginRequiredMixin, ListView) :
     """
