@@ -15,6 +15,23 @@ def hello_world(request) :
 def input_scraping_view(request):
     return render(request, 'input_scraping.html')
 
+def output_evaluation_to_star(evaluation):
+    """
+    評価１～５を☆の数に変換して返す
+    :param evaluation:
+    :return: star
+    """
+    e = 0
+    star = ""
+    while e < 5:
+        if e < int(evaluation):
+            star += "★"
+        else:
+            star += "☆"
+        e += 1
+    return star
+
+
 # LoginRequiredMixin:要認証
 class ListReView(LoginRequiredMixin, ListView) :
     """
@@ -29,8 +46,13 @@ class ListReView(LoginRequiredMixin, ListView) :
         queryset = super().get_queryset()
         # ここでデータを編集します
         for obj in queryset:
+
             # 商品名は27文字以降カット（長いので）
             obj.item_nm = obj.item_nm[:27] + "…"
+
+            # 評価１～５を☆で表現する
+            obj.star = output_evaluation_to_star(obj.evaluation)
+
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -50,6 +72,16 @@ class ListReView(LoginRequiredMixin, ListView) :
 class DetailReView(LoginRequiredMixin, DetailView) :
     template_name = 'review_detail.html'
     model = ReviewModel
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # ここでデータを編集します
+        for obj in queryset:
+            # 評価１～５を☆で表現する
+            obj.star = output_evaluation_to_star(obj.evaluation)
+
+        return queryset
+
 
 class DashBoardView(LoginRequiredMixin, ListView) :
     """
