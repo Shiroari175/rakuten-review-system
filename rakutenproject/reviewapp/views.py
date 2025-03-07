@@ -87,11 +87,8 @@ class DetailReView(LoginRequiredMixin, DetailView) :
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset)
-        # 商品名は27文字以降カット（長いので）
-        obj.item_nm = obj.item_nm[:27] + "…"
-
         # 評価１～５を☆で表現する
-        # obj.star = output_evaluation_to_star(obj.evaluation)
+        obj.star = output_evaluation_to_star(obj.evaluation)
 
         return obj
 
