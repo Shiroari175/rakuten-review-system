@@ -11,4 +11,5 @@ urlpatterns = [
     path('signup_success/', SignUpSuccessView.as_view() , name='signup_success') ,
     path('login/', LoginView.as_view(template_name='login.html'), name='login' ) ,
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout' ),
+    path('', LoginView.as_view(template_name='login.html'), name='login'),
 ]
