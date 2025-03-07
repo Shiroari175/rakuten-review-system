@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-{% block title %}記事削除{% endblock %}
-{% block content %}
-<h2>記事削除</h2>
-<form method="post" class="p-4 m-4 bg-light border">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger">{{ object.title }}を削除する</button>
-</form>
-{% endblock %}
