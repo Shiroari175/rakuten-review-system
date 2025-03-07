@@ -3,6 +3,19 @@
 {% block content %}
 <div class="list-container">
     <h2 class="custom-title text-center">レビュー&nbsp;一覧</h2>
+    <!-- 検索フォーム -->
+    <form method="GET" action="{% url 'review_list' %}">
+        <input type="text" name="query" value="{{ query }}" placeholder="商品名で検索">
+        <div>
+            <label><input type="radio" name="rating" value="1" {% if rating == "1" %}checked{% endif %}> 1星</label>
+            <label><input type="radio" name="rating" value="2" {% if rating == "2" %}checked{% endif %}> 2星</label>
+            <label><input type="radio" name="rating" value="3" {% if rating == "3" %}checked{% endif %}> 3星</label>
+            <label><input type="radio" name="rating" value="4" {% if rating == "4" %}checked{% endif %}> 4星</label>
+            <label><input type="radio" name="rating" value="5" {% if rating == "5" %}checked{% endif %}> 5星</label>
+        </div>
+        <button type="submit">検索</button>
+    </form>
+
     <div class="position-relative ms-5 me-5">
         <div class="position-absolute top-50 left-0">
             件数：&nbsp;{{ page_obj.paginator.count }}&nbsp;件

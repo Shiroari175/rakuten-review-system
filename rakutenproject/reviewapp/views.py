@@ -39,11 +39,20 @@ class ListReView(LoginRequiredMixin, ListView) :
     """
     template_name = 'review_list.html'
     model = ReviewModel
-    # 1ページあたりの表示件数
-    # paginate_by = 20
 
     def get_queryset(self):
         queryset = super().get_queryset()
+
+        # 検索ワード取得 部分検索
+        query = self.request.GET.get('query', '')
+        if query:
+            queryset = queryset.filter(item_nm__icontains=query)
+
+        # 評価フィルタ取得
+        rating = self.request.GET.get('rating', '')
+        if rating:
+            queryset = queryset.filter(evaluation=rating)
+
         # ここでデータを編集します
         for obj in queryset:
 
@@ -61,11 +70,14 @@ class ListReView(LoginRequiredMixin, ListView) :
         # デフォルトの表示件数を25に設定
         page_size = self.request.GET.get('page_size', 25)
 
+        # get_querysetを実行して、ページネーション作成
         paginator = Paginator(self.get_queryset(), page_size)
         page = self.request.GET.get('page')
 
         context['page_obj'] = paginator.get_page(page)
         context['page_size'] = page_size
+        context['query'] = self.request.GET.get('query', '')
+        context['rating'] = self.request.GET.get('rating', '')
 
         return context
 
