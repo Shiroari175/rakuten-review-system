@@ -87,6 +87,13 @@ th {
     width: 100px;
 }
 
+#id-find-form {
+    background: #888;
+    width: 70%;
+    margin: 20px auto;
+    padding: 10px;
+}
+
 /* カード：共通 */
 .custom-card {
     margin: 20px;

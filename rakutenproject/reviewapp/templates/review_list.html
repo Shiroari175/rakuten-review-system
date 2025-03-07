@@ -5,7 +5,11 @@
     <h2 class="custom-title text-center">レビュー&nbsp;一覧</h2>
     <!-- 検索フォーム -->
     <form method="GET" action="{% url 'review_list' %}" id="id-find-form">
-        <input type="text" name="query" value="{{ query }}" placeholder="商品名で検索">
+        <div class="mb-3">
+            <label for="id-item_nm" class="form-label d-inline me-2">商品名:</label>
+            <input id="id-item_nm" class="form-control d-inline w-50" type="text" name="query" value="{{ query }}" placeholder="商品名で検索">
+        </div>
+        <label for="id-item_nm" class="form-label d-inline">評価:</label>
         <div>
             <label><input type="radio" name="rating" value="1" {% if rating == "1" %}checked{% endif %}> 1星</label>
             <label><input type="radio" name="rating" value="2" {% if rating == "2" %}checked{% endif %}> 2星</label>
