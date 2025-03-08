@@ -9,20 +9,43 @@
             <label for="id-item_nm" class="form-label d-inline me-2">商品名:</label>
             <input id="id-item_nm" class="form-control d-inline w-50" type="text" name="query" value="{{ query }}" placeholder="商品名で検索">
         </div>
-        <label for="id-item_nm" class="form-label d-inline">評価:</label>
-        <div>
-            <label><input type="radio" name="rating" value="1" {% if rating == "1" %}checked{% endif %}> 1星</label>
-            <label><input type="radio" name="rating" value="2" {% if rating == "2" %}checked{% endif %}> 2星</label>
-            <label><input type="radio" name="rating" value="3" {% if rating == "3" %}checked{% endif %}> 3星</label>
-            <label><input type="radio" name="rating" value="4" {% if rating == "4" %}checked{% endif %}> 4星</label>
-            <label><input type="radio" name="rating" value="5" {% if rating == "5" %}checked{% endif %}> 5星</label>
+        <label for="id-item_nm" class="form-label  me-3">評価:</label>
+        <div class="form-check form-check-inline align-middle">
+            <input type="radio" class="form-check-input" id="id-rating1" name="rating" value="1" {% if rating == "1" %}checked{% endif %} >
+            <label class="form-check-label pt-1" for="id-rating1">★</label>
         </div>
-        <button type="submit">検索</button>
+        <div class="form-check form-check-inline align-middle">
+            <input type="radio" class="form-check-input" id="id-rating2" name="rating" value="2" {% if rating == "2" %}checked{% endif %}>
+            <label class="form-check-label pt-1" for="id-rating2">
+                ★★
+            </label>
+        </div>
+        <div class="form-check form-check-inline align-middle" >
+            <input type="radio" class="form-check-input" id="id-rating3" name="rating" value="3" {% if rating == "3" %}checked{% endif %}>
+            <label class="form-check-label pt-1" for="id-rating3">
+                ★★★
+            </label>
+        </div>
+        <div class="form-check form-check-inline align-middle">
+            <input type="radio" class="form-check-input" id="id-rating4" name="rating" value="4" {% if rating == "4" %}checked{% endif %}>
+            <label class="form-check-label pt-1" for="id-rating4">
+                ★★★★
+            </label>
+        </div>
+        <div class="form-check form-check-inline align-middle">
+            <input type="radio" class="form-check-input" id="id-rating5" name="rating" value="5" {% if rating == "5" %}checked{% endif %}>
+            <label class="form-check-label pt-1" for="id-rating5">
+                ★★★★★
+            </label>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-primary w-25 m-3 align-end" type="submit">検索</button>
+        </div>
     </form>
 
     <div class="position-relative ms-5 me-5">
         <div class="position-absolute top-50 left-0">
-            件数：&nbsp;{{ page_obj.paginator.count }}&nbsp;件
+            検索結果：&nbsp;{{ page_obj.paginator.count }}&nbsp;件
         </div>
         <form method="get" action="." id="id-page-count-form">
           <div class="text-end">

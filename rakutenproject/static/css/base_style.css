@@ -87,11 +87,14 @@ th {
     width: 100px;
 }
 
+/* 検索フォーム */
 #id-find-form {
-    background: #888;
+    background: #CCFFCC;
     width: 70%;
     margin: 20px auto;
-    padding: 10px;
+    border-radius: 5px;
+    border: solid #999 1px;
+    padding: 25px;
 }
 
 /* カード：共通 */
