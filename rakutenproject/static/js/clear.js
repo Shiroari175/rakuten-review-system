@@ -11,6 +11,9 @@ $(document).ready(function() {
 //        $('#id-rating3').prop('checked', false);
 //        $('#id-rating4').prop('checked', false);
 //        $('#id-rating5').prop('checked', false);
+
+
+
     });
 });
 
