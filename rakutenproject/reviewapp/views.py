@@ -5,6 +5,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator
+
+from .forms import ReviewForm
 from .models import ReviewModel
 
 
@@ -13,7 +15,20 @@ def hello_world(request) :
     return HttpResponse('<h2>hello world from Review_app!!!</h2>')
 
 def input_scraping_view(request):
-    return render(request, 'input_scraping.html')
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            # バリデーション成功
+            name_rak_url = form.cleaned_data['name_rak_url']
+            name_rak_page = form.cleaned_data['name_rak_page']
+            # TODO フォームのデータを使って何かする
+
+        else:
+            # バリデーション失敗
+            print(form.errors)
+    else:
+        form = ReviewForm()
+        return render(request, 'input_scraping.html', {'form': form})
 
 def output_evaluation_to_star(evaluation):
     """
@@ -107,9 +122,18 @@ def run_scraping(request):
     """
     if request.method == 'POST':
 
+        # form = ReviewForm(request.POST)
+        # if form.is_valid():
+        #     # バリデーション成功
+        #     name = form.cleaned_data['url']
+        #     # フォームのデータを使って何かする
+        # else:
+        #     # バリデーション失敗
+        #     print(form.errors)
+
         arg1 = str(request.POST.get('name-rak-url'))
         arg2 = request.POST.get('name-rak-page')
-        arg3 = str(request.user.id) #
+        arg3 = str(request.user.id)
 
         # サブプロセスを使ってスクリプトを実行する
         result = subprocess.run(['python', 'scraping/review.py', arg1, arg2, arg3]
@@ -129,7 +153,8 @@ def run_scraping(request):
                             )
 
     #Get時は何もせず、返して終了
-    return render(request, 'dashboard.html')
+    form = ReviewForm()
+    return render(request, 'dashboard.html',{'form': form})
 
 
 
