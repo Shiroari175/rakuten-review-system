@@ -14,15 +14,36 @@ from .models import ReviewModel
 def hello_world(request) :
     return HttpResponse('<h2>hello world from Review_app!!!</h2>')
 
+
 def input_scraping_view(request):
+    """
+    スクレイピング実行
+    :param request:
+    :return: render:
+    """
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
             # バリデーション成功
-            name_rak_url = form.cleaned_data['name_rak_url']
-            name_rak_page = form.cleaned_data['name_rak_page']
-            # TODO フォームのデータを使って何かする
+            # フォームのデータを使って何かする
+            arg1 = form.cleaned_data['name_rak_url']
+            arg2 = form.cleaned_data['name_rak_page']
+            arg3 = str(request.user.id)
 
+            # サブプロセスを使ってスクリプトを実行する
+            result = subprocess.run(['python','scraping/review.py',
+                                        arg1,str(arg2),arg3
+                                     ]
+                                    , stdout=subprocess.PIPE
+                                    , shell=True
+                                    , text=True
+                                    )
+
+            return HttpResponse("Script executed successfully. : "
+                                "ReturnCode : " + str(result.returncode) + "\n"
+                                 + "Outmsg : " + str(result.stdout) + "\n"
+                                 + "Errmsg : " + str(result.stderr)
+                                )
         else:
             # バリデーション失敗
             print(form.errors)
@@ -114,47 +135,6 @@ class DashBoardView(LoginRequiredMixin, ListView) :
     template_name = 'dashboard.html'
     model = ReviewModel
 
-def run_scraping(request):
-    """
-    楽天レビューのスクレイピングプログラムをキックする
-    :param request:
-    :return: なし
-    """
-    if request.method == 'POST':
-
-        # form = ReviewForm(request.POST)
-        # if form.is_valid():
-        #     # バリデーション成功
-        #     name = form.cleaned_data['url']
-        #     # フォームのデータを使って何かする
-        # else:
-        #     # バリデーション失敗
-        #     print(form.errors)
-
-        arg1 = str(request.POST.get('name-rak-url'))
-        arg2 = request.POST.get('name-rak-page')
-        arg3 = str(request.user.id)
-
-        # サブプロセスを使ってスクリプトを実行する
-        result = subprocess.run(['python', 'scraping/review.py', arg1, arg2, arg3]
-                                , stdout=subprocess.PIPE
-                                , shell=True
-                                , text=True
-                                )
-
-        # スクリプトの出力とリターンコードを取得
-        # output = result.stdout
-        # return_code = result.returncode
-
-        return HttpResponse("Script executed successfully. : "
-                            "ReturnCode : " + str(result.returncode) + "\n"
-                             + "Outmsg : " + str(result.stdout) + "\n"
-                             + "Errmsg : " + str(result.stderr)
-                            )
-
-    #Get時は何もせず、返して終了
-    form = ReviewForm()
-    return render(request, 'dashboard.html',{'form': form})
 
 
 
