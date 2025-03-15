@@ -38,12 +38,14 @@ def input_scraping_view(request):
                                     , shell=True
                                     , text=True
                                     )
+            context = {
+                'return_code': str(result.returncode) ,
+                'out_msg': result.stdout ,
+                'err_msg': result.stderr ,
+            }
 
-            return HttpResponse("Script executed successfully. : "
-                                "ReturnCode : " + str(result.returncode) + "\n"
-                                 + "Outmsg : " + str(result.stdout) + "\n"
-                                 + "Errmsg : " + str(result.stderr)
-                                )
+            return render(request, 'result_scraping.html', context)
+
         else:
             # バリデーション失敗
             print(form.errors)

@@ -239,7 +239,7 @@ def scrape(url, page, user_id) :
     cursor.close()
     conn.close()
 
-    return f"** 処理が終了しました。 処理件数：{i_count} **"
+    return f"処理が終了しました。 処理件数：{i_count}"
 
 
 if __name__ == "__main__":

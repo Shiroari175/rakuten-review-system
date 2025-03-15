@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}楽天レビュー：スクレイピング実行結果{% endblock %}
+{% block content %}
+<h1 class="custom-title text-center">** スクレイピング実行結果 **</h1>
+<div class="card" style="width:75%; margin:35px auto; background: #e6e6fa">
+    <div class="card-body p-4">
+        {% if return_code == '0' %}
+            <h2 class="card-title" style="color: darkblue;">スクレイピングは正常に終了しました。</h2>
+        {% else %}
+            <h5 class="card-text">スクレイピングは異常終了しました。</h5>
+        {% endif %}
+        <br>
+        <h5 class="card-text">処理のメッセージ：{{ out_msg }}</h5>
+        <br>
+        {% if err_msg is not None %}
+            <h5 class="card-text">エラー処理のメッセージ：{{ err_msg }}</h5>
+        {% else %}
+            <h5 class="card-text">エラー処理のメッセージ：なし</h5>
+        {% endif %}
+        <br>
+        <div class="d-flex justify-content-center">
+            <a href="{% url 'input_scraping' %}" class="btn btn-dark">スクレイピング実行に戻る</a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
