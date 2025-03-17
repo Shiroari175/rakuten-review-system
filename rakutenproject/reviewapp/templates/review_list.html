@@ -61,8 +61,20 @@
     </div>
     <table>
     <tr>
-        <th>No.</th>
-        <th>商品名</th>
+        <th>
+            {% if sort is None or sort == 'id' %}
+                <a href="?sort=id">No.▼</a>
+            {% else %}
+                <a href="?sort=-id">No.▲</a>
+            {% endif %}
+        </th>
+        <th>
+            {% if sort_item_nm is None or sort_item_nm == 'item_nm' %}
+                <a href="?sort_item_nm=item_nm">商品名▼</a>
+            {% else %}
+                <a href="?sort_item_nm=-item_nm">商品名▲</a>
+            {% endif %}
+        </th>
         <th>購入者名</th>
         <th>評価</th>
         <th>性別</th>

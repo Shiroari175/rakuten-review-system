@@ -53,6 +53,10 @@ th {
     color: #FFF;
 }
 
+th a {
+    color: #FFF;
+}
+
 .btn-custom {
     background-color: #007bff;
     border: none;

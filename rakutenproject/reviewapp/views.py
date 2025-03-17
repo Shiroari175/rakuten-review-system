@@ -91,7 +91,17 @@ class ListReView(LoginRequiredMixin, ListView) :
         if rating:
             queryset = queryset.filter(evaluation=rating)
 
-        # ここでデータを編集します
+        # ID sort
+        sort_param = self.request.GET.get('sort',None)
+        if sort_param in ['id', '-id']:
+            queryset = queryset.order_by(sort_param)
+
+        # 商品名 sort
+        sort_param_item_nm = self.request.GET.get('sort_item_nm',None)
+        if sort_param_item_nm in ['item_nm', '-item_nm']:
+            queryset = queryset.order_by(sort_param_item_nm)
+
+        # ここでデータを編集
         for obj in queryset:
 
             # 商品名は27文字以降カット（長いので）
@@ -108,7 +118,7 @@ class ListReView(LoginRequiredMixin, ListView) :
         # デフォルトの表示件数を25に設定
         page_size = self.request.GET.get('page_size', 25)
 
-        # get_querysetを実行して、ページネーション作成
+        # get_queryset()を実行して、ページネーション作成
         paginator = Paginator(self.get_queryset(), page_size)
         page = self.request.GET.get('page')
 
@@ -116,6 +126,16 @@ class ListReView(LoginRequiredMixin, ListView) :
         context['page_size'] = page_size
         context['query'] = self.request.GET.get('query', '')
         context['rating'] = self.request.GET.get('rating', '')
+
+        if self.request.GET.get('sort', None) == 'id':
+            context['sort'] = '-id'
+        else :
+            context['sort'] = 'id'
+
+        if self.request.GET.get('sort_item_nm', None) == 'item_nm':
+            context['sort_item_nm'] = '-item_nm'
+        else :
+            context['sort_item_nm'] = 'item_nm'
 
         return context
 
