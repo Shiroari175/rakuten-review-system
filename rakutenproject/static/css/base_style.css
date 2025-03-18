@@ -91,6 +91,17 @@ th a {
     width: 100px;
 }
 
+/* アカウント登録フォーム */
+#id-account-form {
+    background: #CCFFCC;
+    width: 70%;
+    height: 30vw;
+    margin: 20px auto;
+    border-radius: 5px;
+    border: solid #999 1px;
+    padding: 25px;
+}
+
 /* 検索フォーム */
 #id-find-form {
     background: #CCFFCC;
