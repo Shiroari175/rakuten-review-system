@@ -69,10 +69,10 @@
             {% endif %}
         </th>
         <th>
-            {% if sort_item_nm is None or sort_item_nm == 'item_nm' %}
-                <a href="?sort_item_nm=item_nm">商品名▼</a>
+            {% if sort is None or sort == 'item_nm' %}
+                <a href="?sort=item_nm">商品名▼</a>
             {% else %}
-                <a href="?sort_item_nm=-item_nm">商品名▲</a>
+                <a href="?sort=-item_nm">商品名▲</a>
             {% endif %}
         </th>
         <th>購入者名</th>
