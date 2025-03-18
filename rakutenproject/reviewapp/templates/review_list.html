@@ -107,8 +107,8 @@
 <div class="list-pagination">
     <div class="step-links">
         {% if page_obj.has_previous %}
-            <a href="?page=1&page_size={{ page_size }}&query={{ query }}&rating={{ rating }}">&laquo;  最初</a>&nbsp;&nbsp;&nbsp;
-            <a href="?page={{ page_obj.previous_page_number }}&page_size={{ page_size }}&query={{ query }}&rating={{ rating }}">前へ</a>&nbsp;&nbsp;&nbsp;
+            <a href="?page=1&page_size={{ page_size }}&query={{ query }}&rating={{ rating }}&sort={{ page_sort }}">&laquo;  最初</a>&nbsp;&nbsp;&nbsp;
+            <a href="?page={{ page_obj.previous_page_number }}&page_size={{ page_size }}&query={{ query }}&rating={{ rating }}&sort={{ page_sort }}">前へ</a>&nbsp;&nbsp;&nbsp;
         {% endif %}
 
         <span class="current">
@@ -116,8 +116,8 @@
         </span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}&page_size={{ page_size }}&query={{ query }}&rating={{ rating }}">次へ</a>&nbsp;&nbsp;&nbsp;
-            <a href="?page={{ page_obj.paginator.num_pages }}&page_size={{ page_size }}&query={{ query }}&rating={{ rating }}">最後  &raquo;</a>
+            <a href="?page={{ page_obj.next_page_number }}&page_size={{ page_size }}&query={{ query }}&rating={{ rating }}&sort={{ page_sort }}">次へ</a>&nbsp;&nbsp;&nbsp;
+            <a href="?page={{ page_obj.paginator.num_pages }}&page_size={{ page_size }}&query={{ query }}&rating={{ rating }}&sort={{ page_sort }}">最後  &raquo;</a>
         {% endif %}
     </div>
 </div>

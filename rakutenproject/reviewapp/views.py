@@ -126,11 +126,15 @@ class ListReView(LoginRequiredMixin, ListView) :
         context['page_size'] = page_size
         context['query'] = self.request.GET.get('query', '')
         context['rating'] = self.request.GET.get('rating', '')
+        # ページ専用のソート情報
+        context['page_sort'] = ''
 
         if self.request.GET.get('sort', None) == 'id':
             context['sort'] = '-id'
+            context['page_sort'] = 'id'
         else :
             context['sort'] = 'id'
+            context['page_sort'] = '-id'
 
         if self.request.GET.get('sort_item_nm', None) == 'item_nm':
             context['sort_item_nm'] = '-item_nm'
