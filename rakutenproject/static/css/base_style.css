@@ -108,9 +108,20 @@ th a {
     width: 70%;
     margin: 20px auto;
     border-radius: 5px;
+    border: solid #526652 1.5px;
+    padding: 25px;
+}
+
+/* ダッシュボードフォーム */
+#id-dash-form {
+    background: #CCFFCC;
+    width: 70%;
+    margin: 20px auto;
+    border-radius: 5px;
     border: solid #999 1px;
     padding: 25px;
 }
+
 
 /* カード：共通 */
 .custom-card {
