@@ -96,11 +96,6 @@ class ListReView(LoginRequiredMixin, ListView) :
         if sort_param in ['id', '-id', 'item_nm', '-item_nm']:
             queryset = queryset.order_by(sort_param)
 
-        # 商品名 sort
-        # sort_param_item_nm = self.request.GET.get('sort_item_nm',None)
-        # if sort_param_item_nm in ['item_nm', '-item_nm']:
-        #     queryset = queryset.order_by(sort_param_item_nm)
-
         # ここでデータを編集
         for obj in queryset:
 
@@ -144,11 +139,6 @@ class ListReView(LoginRequiredMixin, ListView) :
         else :
             context['sort'] = ''
             context['page_sort'] = ''
-
-        # if self.request.GET.get('sort_item_nm', None) == 'item_nm':
-        #     context['sort_item_nm'] = '-item_nm'
-        # else :
-        #     context['sort_item_nm'] = 'item_nm'
 
         return context
 
