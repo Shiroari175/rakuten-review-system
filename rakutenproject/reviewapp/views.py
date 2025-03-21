@@ -98,10 +98,8 @@ class ListReView(LoginRequiredMixin, ListView) :
 
         # ここでデータを編集
         for obj in queryset:
-
             # 商品名は27文字以降カット（長いので）
             obj.item_nm = obj.item_nm[:27] + "…"
-
             # 評価１～５を☆で表現する
             obj.star = output_evaluation_to_star(obj.evaluation)
 
@@ -157,9 +155,15 @@ class DashBoardView(LoginRequiredMixin, ListView) :
     """
     ダッシュボード
     """
-    template_name = 'dashboard.html'
     model = ReviewModel
+    template_name = 'dashboard.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        records = ReviewModel.objects.all()
+        unique_records = {record.item_nm: record for record in records}.values()
+        context['unique_records'] = unique_records
+        return context
 
 
 

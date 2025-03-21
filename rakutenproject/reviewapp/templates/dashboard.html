@@ -8,16 +8,14 @@
         <label for="id-item_nm" class="form-label pt-2 col-auto">商品名:</label>
         <br>
         <select id="id-item_nm" class="form-select w-75 col-auto" size="3" aria-label="item name list">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-            <option value="4">フォー</option>
-            <option value="5">ファイブ</option>
-            <option value="6">666</option>
+            <option selected>*** 商品名を選択して下さい。 ***</option>
+            {% for rec in unique_records  %}
+                <option value="{{ forloop.counter }}">{{ rec.item_nm }}</option>
+            {% endfor %}
         </select>
+        <br>
         <div class="d-flex">
-            <button class="btn btn-primary w-25 m-3 ms-auto" type="submit">評価データ分析</button>
+            <button class="btn btn-primary w-25 m-3 ms-auto" type="button">評価データ分析</button>
         </div>
     </div>
 </form>
