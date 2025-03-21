@@ -8,6 +8,8 @@ from django.core.paginator import Paginator
 
 from .forms import ReviewForm
 from .models import ReviewModel
+from django.http import JsonResponse
+from django.views import View
 
 
 # Create your views here.
@@ -164,6 +166,21 @@ class DashBoardView(LoginRequiredMixin, ListView) :
         unique_records = {record.item_nm: record for record in records}.values()
         context['unique_records'] = unique_records
         return context
+
+class ModalDataView(View):
+    def get(self, request, *args, **kwargs):
+
+        record_id = kwargs.get('id')  # URLからIDを取得
+        try:
+            record = ReviewModel.objects.get(id=record_id)
+            data = {
+                'item_name': record.item_nm,
+                'review': record.review,
+            }
+            return JsonResponse(data)
+        except ReviewModel.DoesNotExist:
+            return JsonResponse({'error': 'データが見つかりません'}, status=404)
+
 
 
 
