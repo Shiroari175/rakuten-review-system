@@ -22,6 +22,7 @@ class ReviewModel(models.Model) :
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     haki_flg = models.IntegerField(default=0)
     item_nm = models.TextField()
+    group_id = models.CharField(max_length=10)
     purchaser_nm = models.CharField(max_length=100)
     evaluation = models.IntegerField()
     review_title = models.CharField(max_length=100, null=True, blank=True)
