@@ -61,7 +61,18 @@ def scrape(url, page, user_id) :
     option.add_argument("--headless")
     driver = webdriver.Chrome(options=option)
 
-    i_count = 0
+    i_count = 0 # 処理件数
+    group_id = '' #　グループID
+
+    # グループID設定
+    cursor.execute('SELECT MAX(ID) FROM T_REVIEW')
+    row = cursor.fetchone()
+    if row[0] is None:
+        group_id = "S1"
+    else:
+        group_id = "S" + str(row[0])
+
+    # print(group_id)
 
     for i in range(page + 1): #+1補正
 
@@ -202,6 +213,7 @@ def scrape(url, page, user_id) :
             cursor.execute("INSERT INTO T_REVIEW ( "
                            "HAKI_FLG ,"
                            "ITEM_NM ,"
+                           "GROUP_ID ,"
                            "PURCHASER_NM ,"
                            "EVALUATION ,"
                            "REVIEW_TITLE ,"
@@ -212,9 +224,10 @@ def scrape(url, page, user_id) :
                            "ORDER_DATE ,"
                            "CREATE_TIME ,"
                            "USER_ID "
-                           ") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                           ") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
                            ,( 0
                              , item_name
+                             , group_id
                              , purchaser_name
                              , evaluation
                              , review_title
