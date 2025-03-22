@@ -167,19 +167,20 @@ class DashBoardView(LoginRequiredMixin, ListView) :
         context['unique_records'] = unique_records
         return context
 
-class ModalDataView(View):
-    def get(self, request, *args, **kwargs):
+# class ModalDataView(View):
+#     def get(self, request, *args, **kwargs):
+        template_name = 'modal_test.html'
+        # record_id = kwargs.get('id')  # URLからIDを取得
+        # try:
+        #     record = ReviewModel.objects.get(id=record_id)
+        #     data = {
+        #         'item_name': record.item_nm,
+        #         'review': record.review,
+        #     }
+        #     return JsonResponse(data)
+        # except ReviewModel.DoesNotExist:
+        #     return JsonResponse({'error': 'データが見つかりません'}, status=404)
 
-        record_id = kwargs.get('id')  # URLからIDを取得
-        try:
-            record = ReviewModel.objects.get(id=record_id)
-            data = {
-                'item_name': record.item_nm,
-                'review': record.review,
-            }
-            return JsonResponse(data)
-        except ReviewModel.DoesNotExist:
-            return JsonResponse({'error': 'データが見つかりません'}, status=404)
 
 
 

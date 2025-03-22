@@ -1,40 +1,41 @@
 $(document).ready(function() {
 
     // モーダルを開くボタンのクリックイベント
-    $('#open-modal-btn').click(function () {
-        console.log('')
+    $('#open-modal-btn-aaaaa').click(function () {
+        // console.log('modal start!')
         const recordId = $(this).data('record-id'); // data属性からIDを取得
         // Ajaxリクエストを送信
         $.ajax({
-            url: `/modal-data/${recordId}/`, // Djangoのエンドポイント
+            url: '/rak/modal_data/', // Djangoのエンドポイント
             method: 'GET',
             dataType: 'json',
             success: function (data) {
-        if (data.error) {
-            $('#modal-content').text(`エラー: ${data.error}`);
-        } else {
-            // 取得したデータをモーダルに設定
-//            $('#modal-content').html(`
-//              <p>アイテム名: ${data.item_name}</p>
-//              <p>レビュー: ${data.review}</p>
-//            `);
-        }
-        // モーダルを表示
-        $('#myModal').css('display', 'block');
-    },
-    error: function (xhr, status, error) {
+                if (data.error) {
+                    $('#modal-content').text(`エラー: ${data.error}`);
+                } else {
+                    // 取得したデータをモーダルに設定
+        //            $('#modal-content').html(`
+        //              <p>アイテム名: ${data.item_name}</p>
+        //              <p>レビュー: ${data.review}</p>
+        //            `);
+                }
+                // モーダルを表示
+                $('#myModal').css('display', 'block');
+            },
+            error: function (xhr, status, error) {
             console.error('リクエストエラー:', error);
             $('#modal-content').text('データの取得に失敗しました。');
             $('#myModal').css('display', 'block');
-        },
+            },
+        });
     });
 });
 
-// モーダルを閉じるボタンのクリックイベント
-$('#close-modal-btn, #close-modal-btn-footer').click(function () {
+    // モーダルを閉じるボタンのクリックイベント
+    $('#close-modal-btn, #close-modal-btn-footer').click(function () {
       $('#myModal').css('display', 'none');
     });
-});
+
 
 //JS板
 //document.getElementById('open-modal-btn').addEventListener('click', function () {
