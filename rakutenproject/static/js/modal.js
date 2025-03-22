@@ -1,5 +1,41 @@
 $(document).ready(function() {
 
+    $("#fetchData").on("click", function() {
+        console.log('modal start!')
+
+        // 選択された値を取得
+        //const selectedValue = $("#mySelect").val();
+        const selectedValue = $("#id-item_nm").val();
+
+        // DjangoのViewにAjaxリクエストを送信
+        $.ajax({
+            url: "/rak/fetch-data/", // Djangoで定義するURLパス
+            method: "POST",
+            data: {
+                value: selectedValue,
+                csrfmiddlewaretoken: "{{ csrf_token }}" // CSRFトークンを追加
+            },
+            success: function(response) {
+
+                const results = response.data_item_nm;
+                let content = "";
+
+                // レスポンスデータをループしてHTMLを生成
+                results.forEach(function(item) {
+                    content += `<p>${item}</p>`;
+                });
+
+                // レスポンスデータをモーダルに設定
+                $("#modalContent").html(response.data_item_nm);
+            },
+            error: function() {
+                // エラーハンドリング
+                $("#modalContent").html("エラーが発生しました。");
+            }
+        });
+    });
+
+
     // モーダルを開くボタンのクリックイベント
     $('#open-modal-btn-aaaaa').click(function () {
         // console.log('modal start!')
@@ -23,42 +59,16 @@ $(document).ready(function() {
                 $('#myModal').css('display', 'block');
             },
             error: function (xhr, status, error) {
-            console.error('リクエストエラー:', error);
-            $('#modal-content').text('データの取得に失敗しました。');
-            $('#myModal').css('display', 'block');
+                console.error('リクエストエラー:', error);
+                $('#modal-content').text('データの取得に失敗しました。');
+                $('#myModal').css('display', 'block');
             },
         });
     });
 });
 
-    // モーダルを閉じるボタンのクリックイベント
-    $('#close-modal-btn, #close-modal-btn-footer').click(function () {
-      $('#myModal').css('display', 'none');
-    });
-
-
-//JS板
-//document.getElementById('open-modal-btn').addEventListener('click', function () {
-//    const modal = document.getElementById('myModal');
-//    const modalContent = document.getElementById('modal-content');
-//    const recordId = this.dataset.recordId; // ボタンにデータ属性としてIDを設定している場合
-//
-//    // Ajaxリクエスト
-//    fetch(`/modal-data/${recordId}/`)
-//        .then(response => response.json())
-//        .then(data => {
-//            if (data.error) {
-//                modalContent.textContent = data.error;
-//            } else {
-//                modalContent.textContent = `アイテム: ${data.item_name}, レビュー: ${data.review}`;
-//            }
-//            // モーダルを表示
-//            const bootstrapModal = new bootstrap.Modal(modal);
-//            bootstrapModal.show();
-//        })
-//        .catch(error => {
-//            console.error('エラー:', error);
-//        });
+// モーダルを閉じるボタンのクリックイベント
+//$('#close-modal-btn, #close-modal-btn-footer').click(function () {
+//  $('#myModal').css('display', 'none');
 //});
-
 

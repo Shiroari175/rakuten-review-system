@@ -10,6 +10,7 @@ from .forms import ReviewForm
 from .models import ReviewModel
 from django.http import JsonResponse
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -167,9 +168,32 @@ class DashBoardView(LoginRequiredMixin, ListView) :
         context['unique_records'] = unique_records
         return context
 
+
+@csrf_exempt
+def fetch_data(request):
+    if request.method == "POST":
+        selected_value = request.POST.get("value")
+
+        # 選択値に基づいてクエリを実行
+        # result = ReviewModel.objects.filter(group_id=selected_value).first()
+        results = ReviewModel.objects.filter(group_id=selected_value)
+
+        # クエリ結果をレスポンスとして返す
+        # data = {"data": result.review_text if result else "結果が見つかりません"}
+
+
+
+        # 結果をリストとして構築
+        data = {
+                "data_item_nm": [obj.item_nm for obj in results]
+                }
+        return JsonResponse(data)
+
+    return JsonResponse({"error": "無効なリクエスト"}, status=400)
+
 # class ModalDataView(View):
 #     def get(self, request, *args, **kwargs):
-        template_name = 'modal_test.html'
+        # template_name = 'modal_test.html'
         # record_id = kwargs.get('id')  # URLからIDを取得
         # try:
         #     record = ReviewModel.objects.get(id=record_id)
