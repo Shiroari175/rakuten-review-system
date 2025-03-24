@@ -11,6 +11,10 @@ from .models import ReviewModel
 from django.http import JsonResponse
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
+import matplotlib.pyplot as plt
+from io import BytesIO
+import base64
+
 
 
 # Create your views here.
@@ -174,19 +178,57 @@ def fetch_data(request):
     if request.method == "POST":
         selected_value = request.POST.get("value")
 
-        # 選択値に基づいてクエリを実行
+        # 選択された集計グループIDに基づいてクエリを実行
         # result = ReviewModel.objects.filter(group_id=selected_value).first()
         results = ReviewModel.objects.filter(group_id=selected_value)
 
-        # クエリ結果をレスポンスとして返す
-        # data = {"data": result.review_text if result else "結果が見つかりません"}
+        # グループ集計用の辞書
+        evaluation_groups = {
+                    1:{ "star":"★☆☆☆☆", "count":0 } ,
+                    2:{ "star":"★★☆☆☆", "count":0 } ,
+                    3:{ "star":"★★★☆☆", "count":0 } ,
+                    4:{ "star":"★★★★☆", "count":0 } ,
+                    5:{ "star":"★★★★★", "count":0 } ,
+                }
 
+        # グループ集計を行う
+        for obj in results :
+            if obj.evaluation in evaluation_groups :
+                # print(f"見つかりました！データ: { evaluation_groups[obj.evaluation] }")
+                # 見つかったらカウントを＋１する
+                evaluation_groups[obj.evaluation]["count"] += 1
+            else :
+                print("指定したKEYは存在しません。")
 
+        print(f"結果:{evaluation_groups}")
+
+        # データを取得（例: Django ORMのクエリ結果）
+        labels = ["3", "2", "1"]
+        values = [10, 20, 30]  # クエリ結果に基づいて動的に設定
+
+        # Matplotlibで円グラフを作成
+        plt.figure(figsize=(6, 6))
+        plt.pie(values, labels=labels, autopct='%1.1f%%', startangle=90)
+        plt.title("円グラフ例")
+        plt.axis("equal")  # 円形を保つ
+
+        # 画像をメモリに保存
+        buffer = BytesIO()
+        plt.savefig(buffer, format="png")
+        buffer.seek(0)
+        image_png = buffer.getvalue()
+        buffer.close()
+
+        # 画像をBase64エンコード
+        graphic = base64.b64encode(image_png).decode("utf-8")
 
         # 結果をリストとして構築
         data = {
-                "data_item_nm": [obj.item_nm for obj in results]
+                    "data_item_nm": [obj.item_nm for obj in results] ,
+                    "data_evaluation": [obj.evaluation for obj in results] ,
+                    "chart": graphic
                 }
+
         return JsonResponse(data)
 
     return JsonResponse({"error": "無効なリクエスト"}, status=400)
