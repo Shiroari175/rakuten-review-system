@@ -12,6 +12,7 @@ from django.http import JsonResponse
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 import matplotlib.pyplot as plt
+import matplotlib
 from io import BytesIO
 import base64
 
@@ -200,16 +201,41 @@ def fetch_data(request):
             else :
                 print("指定したKEYは存在しません。")
 
-        print(f"結果:{evaluation_groups}")
+        # print(f"結果:{evaluation_groups}")
 
-        # データを取得（例: Django ORMのクエリ結果）
-        labels = ["3", "2", "1"]
-        values = [10, 20, 30]  # クエリ結果に基づいて動的に設定
+        # labels = [
+        #             "1:★☆☆☆☆",
+        #             "2:★★☆☆☆",
+        #             "3:★★★☆☆",
+        #             "4:★★★★☆",
+        #             "5:★★★★★",
+        # ]
+        # values = [
+        #     evaluation_groups[1]["count"] ,
+        #     evaluation_groups[2]["count"] ,
+        #     evaluation_groups[3]["count"] ,
+        #     evaluation_groups[4]["count"] ,
+        #     evaluation_groups[5]["count"] ,
+        # ]  # クエリ結果に基づいて動的に設定
+
+        labels = []
+        values = []
+
+        # グラフデータを設定（例: Django ORMのクエリ結果）
+        # レビューカウント1件以上の場合は、データに加える
+        for key, value in evaluation_groups.items():
+            # print(f"キー: {key}, 星: {value['star']}, カウント: {value['count']}")
+            if value['count'] > 0 :
+                labels.append(value['star'])
+                values.append(value['count'])
 
         # Matplotlibで円グラフを作成
+        # 日本語フォントを指定（例: IPAexGothic）
+        matplotlib.rcParams['font.family'] = 'IPAexGothic'
         plt.figure(figsize=(6, 6))
-        plt.pie(values, labels=labels, autopct='%1.1f%%', startangle=90)
-        plt.title("円グラフ例")
+        plt.pie(values, labels=labels, autopct='%1.1f%%', startangle=90, textprops={'fontsize': 18})
+        plt.legend(fontsize=14, loc="upper right") # 凡例の設定
+        plt.title("") # タイトル商品名を設定する
         plt.axis("equal")  # 円形を保つ
 
         # 画像をメモリに保存

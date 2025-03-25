@@ -17,13 +17,9 @@ $(document).ready(function() {
             success: function(response) {
 
 //                const results = response.data_item_nm;
-//                const results_2 = response.data_evaluation;
                 //let content = "";
                 // レスポンスデータをループしてHTMLを生成
 //                results.forEach(function(item) {
-//                    content += `<p>${item}</p>`;
-//                });
-//                results_2.forEach(function(item) {
 //                    content += `<p>${item}</p>`;
 //                });
 
@@ -34,7 +30,6 @@ $(document).ready(function() {
 
                 // レスポンスデータをモーダルに設定
 //                $("#modalContent").html(response.data_item_nm);
-//                $("#modalContent2").html(response.data_evaluation);
             },
             error: function() {
                 // エラーハンドリング
