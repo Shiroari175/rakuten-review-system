@@ -16,13 +16,6 @@ $(document).ready(function() {
             },
             success: function(response) {
 
-//                const results = response.data_item_nm;
-                //let content = "";
-                // レスポンスデータをループしてHTMLを生成
-//                results.forEach(function(item) {
-//                    content += `<p>${item}</p>`;
-//                });
-
                 // Base64エンコードされた画像を取得
                 const chartData = response.chart;
                 // モーダル内の画像を更新
@@ -39,35 +32,6 @@ $(document).ready(function() {
     });
 
 
-    // モーダルを開くボタンのクリックイベント
-    $('#open-modal-btn-aaaaa').click(function () {
-        // console.log('modal start!')
-        const recordId = $(this).data('record-id'); // data属性からIDを取得
-        // Ajaxリクエストを送信
-        $.ajax({
-            url: '/rak/modal_data/', // Djangoのエンドポイント
-            method: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                if (data.error) {
-                    $('#modal-content').text(`エラー: ${data.error}`);
-                } else {
-                    // 取得したデータをモーダルに設定
-        //            $('#modal-content').html(`
-        //              <p>アイテム名: ${data.item_name}</p>
-        //              <p>レビュー: ${data.review}</p>
-        //            `);
-                }
-                // モーダルを表示
-                $('#myModal').css('display', 'block');
-            },
-            error: function (xhr, status, error) {
-                console.error('リクエストエラー:', error);
-                $('#modal-content').text('データの取得に失敗しました。');
-                $('#myModal').css('display', 'block');
-            },
-        });
-    });
 });
 
 // モーダルを閉じるボタンのクリックイベント
