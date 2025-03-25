@@ -211,8 +211,12 @@ def fetch_data(request):
         for key, value in evaluation_groups.items():
             # print(f"キー: {key}, 星: {value['star']}, カウント: {value['count']}")
             if value['count'] > 0 :
-                labels.append(value['star'])
+                # labels.append(value['star'] + "　件数：" + value['count'])
+                labels.append(value['star'] + "　件数：" + str(value['count']))
                 values.append(value['count'])
+
+        # 日本語フォントを指定（例: IPAexGothic）
+        matplotlib.rcParams['font.family'] = 'MS ゴシック'
 
         # Matplotlibで円グラフを作成
         plt.figure(figsize=(6, 6))
