@@ -203,21 +203,6 @@ def fetch_data(request):
 
         # print(f"結果:{evaluation_groups}")
 
-        # labels = [
-        #             "1:★☆☆☆☆",
-        #             "2:★★☆☆☆",
-        #             "3:★★★☆☆",
-        #             "4:★★★★☆",
-        #             "5:★★★★★",
-        # ]
-        # values = [
-        #     evaluation_groups[1]["count"] ,
-        #     evaluation_groups[2]["count"] ,
-        #     evaluation_groups[3]["count"] ,
-        #     evaluation_groups[4]["count"] ,
-        #     evaluation_groups[5]["count"] ,
-        # ]  # クエリ結果に基づいて動的に設定
-
         labels = []
         values = []
 
@@ -230,8 +215,6 @@ def fetch_data(request):
                 values.append(value['count'])
 
         # Matplotlibで円グラフを作成
-        # 日本語フォントを指定（例: IPAexGothic）
-        matplotlib.rcParams['font.family'] = 'IPAexGothic'
         plt.figure(figsize=(6, 6))
         plt.pie(values, labels=labels, autopct='%1.1f%%', startangle=90, textprops={'fontsize': 18})
         plt.legend(fontsize=14, loc="upper right") # 凡例の設定
@@ -258,22 +241,6 @@ def fetch_data(request):
         return JsonResponse(data)
 
     return JsonResponse({"error": "無効なリクエスト"}, status=400)
-
-# class ModalDataView(View):
-#     def get(self, request, *args, **kwargs):
-        # template_name = 'modal_test.html'
-        # record_id = kwargs.get('id')  # URLからIDを取得
-        # try:
-        #     record = ReviewModel.objects.get(id=record_id)
-        #     data = {
-        #         'item_name': record.item_nm,
-        #         'review': record.review,
-        #     }
-        #     return JsonResponse(data)
-        # except ReviewModel.DoesNotExist:
-        #     return JsonResponse({'error': 'データが見つかりません'}, status=404)
-
-
 
 
 
