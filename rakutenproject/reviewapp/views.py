@@ -181,7 +181,6 @@ def fetch_data(request):
         # ajaxからデータ受取
         selected_value = request.POST.get("value")
         selected_text = request.POST.get("item_nm_text") # 円グラフタイトル
-        # print("Text:" + str(selected_text))
 
         # 選択された集計グループIDに基づいてクエリを実行
         results = ReviewModel.objects.filter(group_id=selected_value)
@@ -198,13 +197,10 @@ def fetch_data(request):
         # グループ集計を行う
         for obj in results :
             if obj.evaluation in evaluation_groups :
-                # print(f"見つかりました！データ: { evaluation_groups[obj.evaluation] }")
                 # 見つかったらカウントを＋１する
                 evaluation_groups[obj.evaluation]["count"] += 1
             else :
                 print("指定したKEYは存在しません。")
-
-        # print(f"結果:{evaluation_groups}")
 
         labels = []
         values = []
@@ -215,7 +211,7 @@ def fetch_data(request):
             # print(f"キー: {key}, 星: {value['star']}, カウント: {value['count']}")
             if value['count'] > 0 :
                 # labels.append(value['star'] + "　件数：" + value['count'])
-                labels.append(value['star'] + "　件数：" + str(value['count']))
+                labels.append(value['star'] + "\n件数：" + str(value['count']))
                 values.append(value['count'])
 
         # 日本語フォントを指定（例: MS Mincho）
@@ -225,7 +221,7 @@ def fetch_data(request):
         plt.figure(figsize=(8, 8))
         plt.pie(values, labels=labels, autopct='%1.1f%%', startangle=90, textprops={'fontsize': 18})
         plt.legend(fontsize=14, loc="upper right") # 凡例の設定
-        plt.title(selected_text[:30], pad=40) # タイトル商品名を設定する
+        plt.title(selected_text[:35], pad=40) # タイトル商品名を設定する
         plt.axis("equal")  # 円形を保つ
 
         # 画像をメモリに保存
@@ -240,8 +236,8 @@ def fetch_data(request):
 
         # 結果をリストとして構築
         data = {
-                    "data_item_nm": [obj.item_nm for obj in results] ,
-                    "data_evaluation": [obj.evaluation for obj in results] ,
+                    # "data_item_nm": [obj.item_nm for obj in results] ,
+                    # "data_evaluation": [obj.evaluation for obj in results] ,
                     "chart": graphic
                 }
 
