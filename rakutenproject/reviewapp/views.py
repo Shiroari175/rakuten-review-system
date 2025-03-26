@@ -12,7 +12,7 @@ from django.http import JsonResponse
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 import matplotlib.pyplot as plt
-import matplotlib
+# import japanize_matplotlib
 from io import BytesIO
 import base64
 
@@ -177,10 +177,13 @@ class DashBoardView(LoginRequiredMixin, ListView) :
 @csrf_exempt
 def fetch_data(request):
     if request.method == "POST":
+
+        # ajaxからデータ受取
         selected_value = request.POST.get("value")
+        selected_text = request.POST.get("item_nm_text") # 円グラフタイトル
+        # print("Text:" + str(selected_text))
 
         # 選択された集計グループIDに基づいてクエリを実行
-        # result = ReviewModel.objects.filter(group_id=selected_value).first()
         results = ReviewModel.objects.filter(group_id=selected_value)
 
         # グループ集計用の辞書
@@ -215,14 +218,14 @@ def fetch_data(request):
                 labels.append(value['star'] + "　件数：" + str(value['count']))
                 values.append(value['count'])
 
-        # 日本語フォントを指定（例: IPAexGothic）
-        matplotlib.rcParams['font.family'] = 'MS ゴシック'
+        # 日本語フォントを指定（例: MS Mincho）
+        plt.rcParams['font.family'] = 'MS Mincho'
 
         # Matplotlibで円グラフを作成
-        plt.figure(figsize=(6, 6))
+        plt.figure(figsize=(8, 8))
         plt.pie(values, labels=labels, autopct='%1.1f%%', startangle=90, textprops={'fontsize': 18})
         plt.legend(fontsize=14, loc="upper right") # 凡例の設定
-        plt.title("") # タイトル商品名を設定する
+        plt.title(selected_text[:30], pad=40) # タイトル商品名を設定する
         plt.axis("equal")  # 円形を保つ
 
         # 画像をメモリに保存

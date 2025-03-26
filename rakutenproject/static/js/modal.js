@@ -5,6 +5,10 @@ $(document).ready(function() {
 
         // 選択された値を取得
         const selectedValue = $("#id-item_nm").val();
+        // 選択されたoptionのtext値を取得
+        const selectedText = $('#id-item_nm option:selected').text();
+        // 隠しフィールドに設定
+        //$('#hiddenInput').val(selectedText);
 
         // DjangoのViewにAjaxリクエストを送信
         $.ajax({
@@ -12,6 +16,7 @@ $(document).ready(function() {
             method: "POST",
             data: {
                 value: selectedValue,
+                item_nm_text: selectedText,
                 csrfmiddlewaretoken: "{{ csrf_token }}" // CSRFトークンを追加
             },
             success: function(response) {

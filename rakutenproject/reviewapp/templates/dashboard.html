@@ -7,7 +7,7 @@
     <div class="row align-items-center">
         <label for="id-item_nm" class="form-label pt-2 col-auto">商品名:</label>
         <br>
-        <select id="id-item_nm" class="form-select w-75 col-auto" size="3" aria-label="item name list">
+        <select id="id-item_nm" class="form-select w-75 col-auto" size="5" aria-label="item name list">
             <option selected>*** 商品名を選択して下さい。 ***</option>
             {% for rec in unique_records  %}
                 <option value="{{ rec.group_id }}">{{ rec.item_nm }}</option>
