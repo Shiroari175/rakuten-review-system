@@ -37,6 +37,8 @@ def scrape(url, page, user_id) :
 
     Parameters:
     url (str): スクレイピングターゲットURL
+    page(int): スクレイピングでレビューを取得するページ数
+    user_id(object): ユーザID
 
     Returns:
     iCount : 登録処理件数
@@ -72,7 +74,7 @@ def scrape(url, page, user_id) :
     else:
         group_id = "S" + str(row[0])
 
-    # print(group_id)
+    # print("指定ページ数：" + str(page))
 
     for i in range(page + 1): #+1補正
 
@@ -80,9 +82,9 @@ def scrape(url, page, user_id) :
         if i == 0:
             continue
 
-        # URL生成
-        edit_url = f"{url}?p={i}#itemReviewList"
-        # print(f"処理URL:{edit_url}")
+        # URL生成 URL最後の一文字は除去
+        edit_url = f"{url[:-1]}?p={i}"
+        # print(f"処理URL:{edit_url}\n")
 
         # WEBドライバ実行 -----
         driver.get(edit_url)
