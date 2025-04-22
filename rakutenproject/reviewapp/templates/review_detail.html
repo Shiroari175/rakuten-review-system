@@ -7,50 +7,57 @@
     }
 </style>
 <h1 class="custom-title text-center">レビュー詳細表示</h1>
-<div class="card" style="width:75%; margin:35px auto; background: #A0eeA0">
-    <div class="card-body p-4">
-        <h5 class="card-title">レビューID：</h5>
-        <h5 class="card-text">{{ object.id }}</h5>
-        <br>
-        <h5 class="card-title">商品名：</h5>
-        <h5 class="card-text">{{ object.item_nm }}</h5>
-        <br>
-        <h5 class="card-title">購入者名：</h5>
-        <p class="card-text">{{ object.purchaser_nm }}</p>
-        <br>
-        <h5 class="card-title">評価：</h5>
-        <p class="card-text">{{ object.star }}</p>
-        <br>
-        <h5 class="card-title">レビュータイトル：</h5>
+<table>
+    <tr>
+        <th>レビューID</th>
+        <td>{{ object.id }}</td>
+    </tr>
+    <tr>
+        <th>商品名</th>
+        <td>{{ object.item_nm }}</td>
+    </tr>
+    <tr>
+        <th>購入者名</th>
+        <td>{{ object.purchaser_nm }}</td>
+    </tr>
+    <tr>
+        <th>評価</th>
+        <td>{{ object.star }}</td>
+    </tr>
+    <tr>
+        <th>レビュータイトル</th>
         {% if object.review_title is None %}
-            <p class="card-text">なし</p>
+            <td>なし</td>
         {% else %}
-            <p class="card-text">{{ object.review_title }}</p>
+            <td>{{ object.review_title }}</td>
         {% endif %}
-        <br>
-        <h5 class="card-title">レビュー本文：</h5>
-        <p class="card-text">{{ object.review_text }}</p>
-        <br>
-        <h5 class="card-title">性別：</h5>
-        <p class="card-text">{{ object.sex }}</p>
-        <br>
-        <h5 class="card-title">年齢：</h5>
-        <p class="card-text">{{ object.age }}</p>
-        <br>
-        <h5 class="card-title">商品詳細（カラー・サイズなど）：</h5>
-        <p class="card-text">{{ object.item_detail }}</p>
-        <br>
-        <h5 class="card-title">注文日：</h5>
+    </tr>
+    <tr>
+        <th>レビュー本文</th>
+        <td>{{ object.review_text }}</td>
+    </tr>
+    <tr>
+        <th>性別</th>
+        <td>{{ object.sex }}</td>
+    </tr>
+    <tr>
+        <th>年齢</th>
+        <td>{{ object.age }}</td>
+    </tr>
+    <tr>
+        <th>商品詳細（カラー・サイズなど）</th>
+        <td>{{ object.item_detail }}</td>
+    </tr>
+    <tr>
+        <th>注文日</th>
         {% if object.order_date is None %}
-            <p class="card-text">なし</p>
+            <td>なし</td>
         {% else %}
-            <p class="card-text">{{ object.order_date }}</p>
+            <td>{{ object.order_date }}</td>
         {% endif %}
-        <br>
-        <br>
-        <div class="d-flex justify-content-center">
-            <a href="{% url 'review_list' %}" class="btn btn-dark">一覧に戻る</a>
-        </div>
-    </div>
+    </tr>
+</table>
+<div class="d-flex justify-content-center">
+    <a href="{% url 'review_list' %}" class="btn btn-dark">一覧に戻る</a>
 </div>
 {% endblock %}
